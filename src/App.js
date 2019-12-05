@@ -4,13 +4,19 @@ import './App.css';
 
 function App() {
   return (
-    <main className='App'>
-      <Split className="left" flexBasis={2}>
-      This is the content of the split component.
-      </Split>
-      <Split className="right">
-      This is the content of the split component.
-      </Split>
+    <main className="App">
+      <div className="main-container">
+        <div className="left-side">
+          <Split className="left" 
+                 content="This is the content of the split component."
+                 num={10}/>
+        </div>
+        <div className="right-side">
+          <Split className="right" 
+                 content="This is the content of the split component."
+                 num={1} /> 
+        </div>
+      </div>
     </main>
   );
 }

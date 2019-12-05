@@ -4,12 +4,20 @@
     min-height: calc(100vh - 80px);
 }
 
-.left {
-    background-color: darkslategray;
-    color: azure;
+.main-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
-.right {
+.left-side {
+    background-color: darkslategray;
+    color: azure;
+    width: 70%;
+}
+
+.right-side {
     background-color: wheat;
     color: firebrick;
+    width: 30%;
 }

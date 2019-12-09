@@ -16,10 +16,18 @@ function Split(props) {
         default :   newHTML = <h1> Hello world </h1>;
     }*/
 
+    function modifySomethingElse (){
+        return "Text text more text";
+    }
+
     return (
         <div className={'split ' + props.className} >
-            {props.content}
-            {newHTML}
+            <div>
+                {props.content}
+                {newHTML}
+                {modifySomethingElse()}
+            </div>
+            <button onClick={props.changeName2}> Change text </button>
         </div>
     );
 }

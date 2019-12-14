@@ -6,11 +6,11 @@ class TheDate extends React.Component {
     this.state = {
       dateTime: new Date()
     }
-    console.log('constructor');
+    // console.log('constructor');
   }
 
   componentDidMount() {
-    console.log('component did mount');
+    // console.log('component did mount');
     this.interval = setInterval(() => {
       // console.log('interval');
       this.setState({
@@ -20,7 +20,7 @@ class TheDate extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('unmount');
+    // console.log('unmount');
     clearInterval(this.interval);
   }
   

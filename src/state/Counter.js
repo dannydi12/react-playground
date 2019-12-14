@@ -13,8 +13,8 @@ class Counter extends React.Component {
     this.setState({
       count: this.state.count + this.props.step
     });
-    console.log('props in handleButtonClick', this.props)
-    console.log('state in handleButtonClick', this.state)
+    // console.log('props in handleButtonClick', this.props)
+    // console.log('state in handleButtonClick', this.state)
   }
 
   render() {

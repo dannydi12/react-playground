@@ -7,42 +7,81 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      leftContent : "This is the content of the left split component!",
-      rightContent : "This is the content of the right split component!"
+      listOfDogs : [],
+      baseURL : "https://dog.ceo/api/breed/"
     }
+  }
 
-    //this.changeName = this.changeName.bind(this);
+  updateListOfDogs = ( dogList ) => {
+    const allDogs = dogList.message.map( dogUrl => {
+      return {url : dogUrl}
+    });
+
+    console.log( allDogs );
+
+    this.setState({
+      listOfDogs: allDogs
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log( event );
+    console.log( event.target );
+    console.log( event.target.dogbreed );
+    console.log( event.target.dogbreed.value );
+
+    const breed = event.target.dogbreed.value;
+    const url = `${this.state.baseURL}${breed}/images`;
+    fetch( url )
+      .then( response => {
+
+        if( response.ok ){
+          return response.json();
+        }
+        throw new Error("Something went wrong");
+      })
+      .then( responseJSON => {
+        console.log( responseJSON );
+        this.updateListOfDogs( responseJSON );
+      })
+      .catch( err => {
+        console.log(err);
+        this.setState({
+          listOfDogs: []
+        })
+      })
 
   }
 
-  changeName(event){
+  displayResults = () => {
 
-    event.preventDefault();
-
-    this.setState({
-      leftContent : "Text changed!",
-      rightContent : "Text changed as well!"
-    });
+    console.log( "Length", this.state.listOfDogs.length )
+    if( this.state.listOfDogs.length === 0){
+      return (<li> No images found! Type a valid breed</li>);
+    }
+    else{
+      return this.state.listOfDogs.map( (dog, index) => {
+        return (<li key={index}>
+                  <img src={dog.url} />
+                </li>)
+      })
+    }
   }
 
   render(){
     return (
       <main className="App">
-        <div className="main-container">
-          <div className="left-side">
-            <Split className="left" 
-                  content={this.state.leftContent}
-                  changeName={(event) => this.changeName(event)}
-                  num={10}/>
-          </div>
-          <div className="right-side">
-            <Split className="right" 
-                  content={this.state.rightContent}
-                  changeName={(event) => this.changeName(event)}
-                  num={1} /> 
-          </div>
-          {/*<button onClick={this.changeName}> A different button </button>*/}
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="dog-breed"> Type a dog breed</label>
+          <input type="text" name="dogbreed" id="dog-breed"/>
+          <button type="submit"> Find a dog image</button>
+        </form>
+
+        <ul className="js-results">
+          {this.displayResults()}
+        </ul>
       </main>
     );
   }

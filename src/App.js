@@ -7,26 +7,16 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      firstName : "Daniel",
-      lastName : "Di Venere",
       leftContent : "This is the content of the left split component!",
       rightContent : "This is the content of the right split component!"
     }
 
-    //this.changeName2 = this.changeName2.bind(this);
+    //this.changeName = this.changeName.bind(this);
+
   }
 
-  changeName = (event) => {
+  changeName(event){
 
-    event.preventDefault();
-
-    this.setState({
-      leftContent : "Text changed!",
-      rightContent : "Text changed as well!"
-    });
-  }
-
-  changeName2(event){
     event.preventDefault();
 
     this.setState({
@@ -42,13 +32,13 @@ class App extends React.Component {
           <div className="left-side">
             <Split className="left" 
                   content={this.state.leftContent}
-                  changeName2={(event) => this.changeName2(event)}
+                  changeName={(event) => this.changeName(event)}
                   num={10}/>
           </div>
           <div className="right-side">
             <Split className="right" 
                   content={this.state.rightContent}
-                  changeName={this.changeName}
+                  changeName={(event) => this.changeName(event)}
                   num={1} /> 
           </div>
           {/*<button onClick={this.changeName}> A different button </button>*/}
